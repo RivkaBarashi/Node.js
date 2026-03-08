@@ -1,6 +1,13 @@
-function errorHandler(err, req, res, next) {
-  console.error(err.stack); // מדפיס לשורת הפקודה את השגיאה
-  res.status(500).json({ error: err.message || 'Server error' }); // שולח תגובה מסודרת ללקוח
-}
+
+const errorHandler = (err, req, res, next) => {
+    console.error(err.stack);
+
+    const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+
+    res.status(statusCode).json({
+        success: false,
+        message: err.message || "Server Error"
+    });
+};
 
 module.exports = errorHandler;

@@ -1,4 +1,4 @@
-const { User } = require('../models'); // ייבוא מודל User
+const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
 exports.login = async (req, res, next) => {
@@ -19,9 +19,8 @@ exports.login = async (req, res, next) => {
       return res.status(401).json({ error: 'Invalid password' });
     }
 
-    // אם רוצים, כאן אפשר ליצור JWT או session
     res.status(200).json({ message: 'Login successful' });
   } catch (err) {
-    next(err); // שולח את השגיאה למiddleware המרכזי
+    next(err);
   }
 };
